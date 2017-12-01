@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Loan petitions{% endblock title %}
+
+{% block style %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+{% endblock style %}
+
+{% block content %}
+    <h1>Loan petitions</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>DNI</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Ammount</th>
+            <th>Approved</th>
+            <th>Delete?</th>
+        </tr>
+        {% for loanpetition in object_list %}
+        <tr>
+            <td>
+                <a href="{% url 'loan-update' loanpetition.id %}">{{ loanpetition.id }}</a>
+            </td>
+            <td>{{ loanpetition.dni }}</td>
+            <td>{{ loanpetition.firstname }}</td>
+            <td>{{ loanpetition.lastname }}</td>
+            <td>{{ loanpetition.gender }}</td>
+            <td>{{ loanpetition.email }}</td>
+            <td>{{ loanpetition.ammount }}</td>
+            <td>{{ loanpetition.approved }}</td>
+            <td><a href="{% url 'loan-delete' loanpetition.id %}">Delete</a>
+        </tr>
+        {% empty %}
+        <tr>No loan petitions yet.</tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
